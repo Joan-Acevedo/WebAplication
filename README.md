@@ -3,7 +3,7 @@ Joan Acevedo
 ---
 Create a CRUD System to Manage Properties
 
-Objective:
+### Objective:
 
 Students are tasked with developing a simple CRUD (Create, Read, Update, Delete) system for managing real estate properties. The goal is to build a basic web application that allows users to perform the following operations on property listings:
 
@@ -11,7 +11,9 @@ Students are tasked with developing a simple CRUD (Create, Read, Update, Delete)
 - Read or view a list of all properties and individual property details.
 - Update existing property details.
 - Delete property listings.
-      Requirements:
+      
+### Requirements:
+
 1.	Frontend (HTML + JavaScript):
       -	Create a simple user interface with forms to capture property information (e.g., address, price, size, description).
       -	Display a list of all properties with options to view, update, and delete each one.
@@ -47,19 +49,77 @@ Finalmente comprobamos que hasta ahora todo este funcionando correctamente busca
         - Price
         - Size
         - Description
+      
+---
+
+Para esta nueva sección del Back-End, procedi a crear las clases:
+
+- `PropertyController` la cual se encarga de exponer los endpoints REST.
+- `Property` la cual representará una propiedad inmobiliaria en la base de datos.
+- `PropertyRepository` `(Interfaz)` la cual maneja la comunicación con la base de datos.
+- `PropertyService` la cual manejará la lógica de negocio.
+
+Las cuales se distribuyeron en la siguiente estructura de base de archivos:
+
+![Image](https://github.com/user-attachments/assets/c54305f5-8f5f-47a6-954f-617be7dcc0fe)
+
+Podemos destacar que en la clase `PropertyController` encontramos el mapeo de las operaciones CRUD.
+
+```java
+    @GetMapping("/{id}")
+    public ResponseEntity<Property> getPropertyById(@PathVariable Long id) {
+        Optional<Property> property = propertyService.getPropertyById(id);
+        return property.map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public Property createProperty(@RequestBody Property property) {
+        return propertyService.createProperty(property);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Property> updateProperty(@PathVariable Long id, @RequestBody Property updatedProperty) {
+        try {
+            Property property = propertyService.updateProperty(id, updatedProperty);
+            return ResponseEntity.ok(property);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteProperty(@PathVariable Long id) {
+        propertyService.deleteProperty(id);
+        return ResponseEntity.noContent().build();
+    }
+```
+
+También podemos destacar la clase `Property` que es donde tenemos los atributos necesarios y la generación automatica del ID.
+
+```java
+    //Generación automatica del ID
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+```
+
+---
+
 3.	Database (MySQL):
-      •	Create a properties table with columns for ID, address, price, size, and description.
-      •	Use JPA/Hibernate to map the property objects to the database.
-      •	Implement data persistence for all CRUD operations.
+      -	Create a properties table with columns for ID, address, price, size, and description.
+      -	Use JPA/Hibernate to map the property objects to the database.
+      -	Implement data persistence for all CRUD operations.
+
 4.	The backend services and the database should be deployed in separate servers in AWS.
       
-Optional Enhancements (for extra credit):
+### Optional Enhancements (for extra credit):
 
 1.	Add pagination to the property listing.
 2.	Implement search functionality to filter properties by location, price, or size.
 3.	Provide user feedback on successful or failed operations (e.g., success messages, error notifications).
       
-Deliverables:
+### Deliverables:
 
 1.	A working CRUD system that allows users to manage property listings deployed on AWS
 2.	Code in a GitHub Repository:
