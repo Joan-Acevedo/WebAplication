@@ -104,6 +104,32 @@ También podemos destacar la clase `Property` que es donde tenemos los atributos
     private Long id;
 ```
 
+Ahora procedemos a ver si funciona, para esto volvemos a acceder a `http://localjost:8080` e ingresamos unos datos de prueba:
+
+![Image](https://github.com/user-attachments/assets/8e4bdea5-444c-4ba0-9eda-123b74b4c062)
+
+Al dar click en el botón `Guardar` vemos que la clase `PropertyController` cumple con las funciones de `Create` y `Read`:
+
+![Image](https://github.com/user-attachments/assets/624009d2-b2ce-4f73-9cf5-dc601859c883)
+
+Ahora, al dar click en el botón `Editar` vemos que nos permite acutalizar los datos, en este caso cambiamos el tamaño de `20` a `35`:
+
+![Image](https://github.com/user-attachments/assets/a1d7ea82-ad58-40a0-b8f5-54237ed859f0)
+
+Al dar click en el botón `Guardar` vemos que efectivamente se cumple con la función de `Update`, actualizando los datos de forma correcta:
+
+![Image](https://github.com/user-attachments/assets/375caf97-ab65-49d1-a995-3ee3c57749e4)
+
+Ahora, al dar click en el botón `Eliminar` vemos que que nos sale una ventana emergente para confirmar el eliminación de los datos:
+
+![Image](https://github.com/user-attachments/assets/58421266-f044-41bc-9410-f40869bf0493)
+
+Y al dar click en el botón `Ok`  vemos que efectivamente se cumple con la función de `Delete`:
+
+![Image](https://github.com/user-attachments/assets/194be1b8-857e-4359-b619-83116ae42f0a)
+
+**NOTA: Recordemos que en esta parte todavia no ejecutamos nada con la base de datos**
+
 ---
 
 3.	Database (MySQL):
