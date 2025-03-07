@@ -137,6 +137,44 @@ Y al dar click en el botón `Ok`  vemos que efectivamente se cumple con la funci
       -	Use JPA/Hibernate to map the property objects to the database.
       -	Implement data persistence for all CRUD operations.
 
+---
+
+Procedemos a crear la base de datos con Docker, para ello nos dirigimos a la terminal de nuestro computador y nos ubicamos en la dirección del proyecto e ingresamos el siguiente comando:
+
+      docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=admin123 -e MYSQL_DATABASE=web_application -p 3306:3306 -d mysql:8
+
+Podemos obser como se va creando la imagen de la base de datos, y si queremos confirmar su creación, podemos ingresar el comando `docker ps`:
+
+![Image](https://github.com/user-attachments/assets/5feaf599-2905-4b2a-adfe-b87c48299459)
+
+Ya con la base de datos creada, procedemos a modificar nuestro archivo `application.properties` para que pueda realizar el mapeo con la base de datos, para ello, agregamos el siguiente código:
+
+```text
+spring.application.name=WebAplication
+spring.jpa.hibernate.ddl-auto=update
+spring.datasource.url=jdbc:mysql://localhost:3306/localsql?createDatabaseIfNotExist=true
+spring.datasource.username=admin
+spring.datasource.password=admin
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.jpa.show-sql=true
+```
+
+También debemos agregar la dependencia de MySQL al pom:
+
+```text
+  <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>8.0.33</version>
+  </dependency>
+```
+
+Finalmente ejecutamos los comandos `mvn clean install` seguido de `mvn spring-boot:run` y vemos que se ejecuta con exito:
+
+![Image](https://github.com/user-attachments/assets/6efc2160-9fb1-4fe3-9449-886c0239f8ed)
+
+---
+
 4.	The backend services and the database should be deployed in separate servers in AWS.
       
 ### Optional Enhancements (for extra credit):
