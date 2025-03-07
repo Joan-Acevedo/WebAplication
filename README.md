@@ -1,4 +1,8 @@
-Joan Acevedo
+# Universidad Escuela Colombiana de Ingeniería Julio Garavito
+
+## Arquitectura Empresarial - Patrones arquitecturales
+
+### Autor: Joan Acevedo
 
 ---
 Create a CRUD System to Manage Properties
@@ -175,27 +179,16 @@ Finalmente ejecutamos los comandos `mvn clean install` seguido de `mvn spring-bo
 
 ---
 
-4.	The backend services and the database should be deployed in separate servers in AWS.
-      
-### Optional Enhancements (for extra credit):
+### Arquitectura
 
-1.	Add pagination to the property listing.
-2.	Implement search functionality to filter properties by location, price, or size.
-3.	Provide user feedback on successful or failed operations (e.g., success messages, error notifications).
-      
-### Deliverables:
+Para este trabajo la arquitectura que se decidió manejar de la siguiente manera:
 
-1.	A working CRUD system that allows users to manage property listings deployed on AWS
-2.	Code in a GitHub Repository:
-      -	All project code should be organized and uploaded to a GitHub repository.
-      -	The repository should follow best practices with clear folder structures for frontend, backend, and database configuration.
-3.	README File:
-      -	Include a README.md with:
-        - Project Summary: A brief explanation of the system and its main functionality (property management).
-        - System Architecture: Description of the frontend, backend, and database, and how they interact.
-        - Class Design: Overview of the main classes with diagrams if possible (e.g., Property, PropertyService, PropertyController).
-        - Deployment Instructions: Steps for generating and deploying images , from setup to running the services in AWS
-        - Screenshots: Images showing the system in action, including CRUD operations.
-4.	Deployment Video:
-      -	A short video demonstrating the system running, including examples of create, read, update, and delete operations.
-      -	The video should show how to deploy the system
+Tenemos una máquina virtual que se conecta a una base de datos relacional en una red privada para que no se filtre información. Adémas, el usuario consulta los servicios a través de una página web la cual está alojada en un servidor de aplicaciones en la nube.
+
+![Image](https://github.com/user-attachments/assets/ec385b03-b4bb-4c45-8459-6216cb17d0d6)
+
+---
+
+### Diagrama de clases
+
+![Image](https://github.com/user-attachments/assets/d6d0d520-a694-419d-98c1-82dffa74385f)
